@@ -37,8 +37,8 @@ class SplashActivity : AppCompatActivity() {
             //user logged in, check user type
 
             val ref = FirebaseDatabase.getInstance().getReference("Users")
-            ref.child(firebaseUser.uid)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+            ref.child(firebaseUser.uid) //nhan datasnapshop tu uid
+                .addListenerForSingleValueEvent(object : ValueEventListener { //them even nang nghe thay doi duy nhat cua gia tri
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         // get user type  user or admin
