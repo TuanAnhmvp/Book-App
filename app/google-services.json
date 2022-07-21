@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "802523444687",
+    "firebase_url": "https://book-app-kotlin-98af8-default-rtdb.firebaseio.com",
     "project_id": "book-app-kotlin-98af8",
     "storage_bucket": "book-app-kotlin-98af8.appspot.com"
   },
