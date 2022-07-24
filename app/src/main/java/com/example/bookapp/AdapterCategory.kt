@@ -2,6 +2,7 @@ package com.example.bookapp
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 
 import android.view.View
@@ -61,7 +62,18 @@ class AdapterCategory: RecyclerView.Adapter<AdapterCategory.HolderCategory>, Fil
                 }
                 .show()
         }
+
+        //handle click, vao cac item category and put id and title
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, PdfListAdminActivity::class.java)
+            intent.putExtra("categoryId", id)
+            intent.putExtra("category", category)
+            context.startActivity(intent)
+        }
     }
+
+
+
 
     private fun deleteCategory(model: ModelCategory, holder: HolderCategory) {
         //get id of category to delete

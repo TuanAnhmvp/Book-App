@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable-v24/shape_button01.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/ic_back_white.xml" value="0.1" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/row_pdf_admin.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_button01.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_button02.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_button03.xml" value="0.1" />
@@ -16,10 +17,12 @@
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_dashboard_user.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_add.xml" value="0.2" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_add.xml" value="0.4" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_list_admin.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/row_category.xml" value="0.264" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/row_pdf_admin.xml" value="0.264" />
       </map>
     </option>
   </component>
