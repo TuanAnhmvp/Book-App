@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 
 
 import java.util.*
+import kotlin.collections.HashMap
 
 //create an application class that will contain the functions that will be used multiple places in app
 
@@ -185,6 +186,42 @@ class MyApplication: Application() {
 
 
                 }
+
+        }
+
+
+        fun incremtntBookViewCount(bookId : String){
+            //1, Get current book views coutn
+            val ref = FirebaseDatabase.getInstance().getReference("Books")
+            ref.child(bookId)
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        //get view count
+                        var viewsCount = "${snapshot.child("viewCount").value}"
+
+                        if (viewsCount == "" || viewsCount == "null"){
+                            viewsCount = "0";
+
+                        }
+
+                        //2, Increment vies count
+                        val newViewsCount = viewsCount.toLong() +1
+
+                        //set up data to update in db
+                        val hashMap = HashMap<String, Any>()
+                        hashMap["viewCount"] = newViewsCount
+
+                        //set to db
+                        val dbRef = FirebaseDatabase.getInstance().getReference("Books")
+                        dbRef.child(bookId)
+                            .updateChildren(hashMap)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+
+                    }
+                })
 
         }
 
