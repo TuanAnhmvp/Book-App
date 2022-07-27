@@ -190,7 +190,7 @@ class MyApplication: Application() {
         }
 
 
-        fun incremtntBookViewCount(bookId : String){
+        fun incrementBookViewCount(bookId : String){
             //1, Get current book views coutn
             val ref = FirebaseDatabase.getInstance().getReference("Books")
             ref.child(bookId)

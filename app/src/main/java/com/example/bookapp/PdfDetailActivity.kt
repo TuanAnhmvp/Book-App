@@ -1,5 +1,6 @@
 package com.example.bookapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bookapp.databinding.ActivityPdfDetailBinding
@@ -30,10 +31,20 @@ class PdfDetailActivity : AppCompatActivity() {
         }
 
         //increment book view count, whenever this page start
-        MyApplication.incremtntBookViewCount(bookId)
+        MyApplication.incrementBookViewCount(bookId)
 
         //
         loadBookDetail()
+
+        //handle click, open pdf view activity
+        binding.readBookBtn.setOnClickListener {
+            val intent = Intent(this, PdfViewActivity::class.java)
+            intent.putExtra("bookId", bookId)
+            startActivity(intent)
+        }
+
+
+
     }
 
     private fun loadBookDetail() {
