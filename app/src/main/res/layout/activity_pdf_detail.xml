@@ -273,6 +273,18 @@
             android:background="@drawable/shape_button01"
             android:layout_width="0dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/favoriteBtn"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_favorite_white"
+            android:text="Add Favorite"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_button01"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
    
