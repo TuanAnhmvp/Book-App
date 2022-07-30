@@ -55,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
         if Admin - Move to admin dashboard*/
         }
 
+        binding.forgotTv.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
+
     }
     private var email = ""
     private var password = ""
