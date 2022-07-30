@@ -1,6 +1,8 @@
-package com.example.bookapp
+package com.example.bookapp.filters
 
 import android.widget.Filter
+import com.example.bookapp.adapter.AdapterPdfUser
+import com.example.bookapp.models.ModelPdf
 
 class FilterPdfUser: Filter {
     //arraylist
@@ -44,7 +46,7 @@ class FilterPdfUser: Filter {
 
     override fun publishResults(constraint: CharSequence?, results: FilterResults) {
         //apply filter changes
-        adapterPdfUser.pdfArrayList = results.values as ArrayList<ModelPdf> /* = java.util.ArrayList<com.example.bookapp.ModelPdf> */
+        adapterPdfUser.pdfArrayList = results.values as ArrayList<ModelPdf> /* = java.util.ArrayList<com.example.bookapp.models.ModelPdf> */
 
         //notify changes
         adapterPdfUser.notifyDataSetChanged()

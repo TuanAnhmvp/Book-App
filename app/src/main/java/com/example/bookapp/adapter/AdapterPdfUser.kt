@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookapp.filters.FilterPdfUser
+import com.example.bookapp.MyApplication
+import com.example.bookapp.activities.PdfDetailActivity
 import com.example.bookapp.databinding.RowPdfUserBinding
+import com.example.bookapp.models.ModelPdf
 
 class AdapterPdfUser: RecyclerView.Adapter<AdapterPdfUser.HolderPdfUser>, Filterable{
     //arraylist to hold filtered pdf

@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.Manifest
 import android.app.ProgressDialog
@@ -11,6 +11,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.bookapp.Constants
+import com.example.bookapp.MyApplication
+import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityPdfDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -167,8 +170,8 @@ class PdfDetailActivity : AppCompatActivity() {
 
         try {
             val downloadsFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-            downloadsFolder.mkdir() //create folder if not exists
-            val filePath = downloadsFolder.path+"/"+nameWithExtention
+            downloadsFolder.mkdirs() //create folder if not exists
+            val filePath = downloadsFolder.path +"/"+ nameWithExtention
             val out = FileOutputStream(filePath)
             out.write(bytes)
             out.close()
@@ -258,7 +261,13 @@ class PdfDetailActivity : AppCompatActivity() {
                     MyApplication.loadCategory(categoryId, binding.categoryTv)
 
                     //load pdf thumbnail, pages count
-                    MyApplication.loadPdfFromUrlSinglePage("$bookUrl", "$bookTitle", binding.pdfView, binding.progressBar, binding.pagesTv)
+                    MyApplication.loadPdfFromUrlSinglePage(
+                        "$bookUrl",
+                        "$bookTitle",
+                        binding.pdfView,
+                        binding.progressBar,
+                        binding.pagesTv
+                    )
 
                     //load size
                     MyApplication.loadPdfSize("$bookUrl", "$bookTitle", binding.sizeTv)
@@ -289,7 +298,8 @@ class PdfDetailActivity : AppCompatActivity() {
                         //available in favorite
                         //set drawable top icon
                         Log.d(TAG, "onDataChange: available in favorite")
-                        binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_favorite_white, 0, 0)
+                        binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,
+                            R.drawable.ic_baseline_favorite_white, 0, 0)
                         binding.favoriteBtn.text = "Remove Favorite"
 
                     }
@@ -297,7 +307,8 @@ class PdfDetailActivity : AppCompatActivity() {
                         //not available in favorite
                         //set drawable top icon
                         Log.d(TAG, "onDataChange: not available in favorite")
-                        binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_favorite_white, 0, 0)
+                        binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,
+                            R.drawable.ic_favorite_white, 0, 0)
                         binding.favoriteBtn.text = "Add Favorite"
 
                     }

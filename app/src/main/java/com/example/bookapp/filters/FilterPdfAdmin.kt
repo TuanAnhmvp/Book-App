@@ -1,6 +1,8 @@
-package com.example.bookapp
+package com.example.bookapp.filters
 
 import android.widget.Filter
+import com.example.bookapp.adapter.AdapterPdfAdmin
+import com.example.bookapp.models.ModelPdf
 
 /*Used to filter data from rcv| search pdf from pdf list in rcv*/
 class FilterPdfAdmin : Filter{
@@ -44,7 +46,7 @@ class FilterPdfAdmin : Filter{
 
     override fun publishResults(constraint: CharSequence?, results: FilterResults) {
         //apply filter changes
-        adapterPdfAdmin.pdfArrayList = results.values as ArrayList<ModelPdf> /* = java.util.ArrayList<com.example.bookapp.ModelPdf> */
+        adapterPdfAdmin.pdfArrayList = results.values as ArrayList<ModelPdf> /* = java.util.ArrayList<com.example.bookapp.models.ModelPdf> */
 
         //notify changes
         adapterPdfAdmin.notifyDataSetChanged()

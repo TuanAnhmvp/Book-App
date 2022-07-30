@@ -1,13 +1,13 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import com.example.bookapp.adapter.AdapterCategory
 import com.example.bookapp.databinding.ActivityDashboardAdminBinding
+import com.example.bookapp.models.ModelCategory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
