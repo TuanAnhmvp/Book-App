@@ -233,6 +233,47 @@
                 android:layout_marginTop="5dp"
                 android:text="The description of the book."
                 android:textColor="@color/black" />
+            <!--View to seprate-->
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/gray03"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--TextView Comments label-->
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Comments"
+                    android:textSize="16sp"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!--ImageButton: Show dialog to add new comment-->
+                <ImageButton
+                    android:id="@+id/addCommentBtn"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_comment_black"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!--recv show comments-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commentsRv"
+                    android:layout_below="@id/addCommentBtn"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    tools:listitem="@layout/row_comment"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

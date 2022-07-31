@@ -1,6 +1,7 @@
 package com.example.bookapp.activities
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,13 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.bookapp.Constants
 import com.example.bookapp.MyApplication
 import com.example.bookapp.R
+import com.example.bookapp.adapter.AdapterComment
 import com.example.bookapp.databinding.ActivityPdfDetailBinding
+import com.example.bookapp.databinding.DialogCommentAddBinding
+import com.example.bookapp.models.ModelComment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -48,8 +53,10 @@ class PdfDetailActivity : AppCompatActivity() {
     //hold a boolean value
     private var isInMyFavorite = false
 
-
-
+    //arraylist to hold comments
+    private lateinit var commentArayList: ArrayList<ModelComment>
+    //adapter to be set to recycleview
+    private lateinit var adapterComment: AdapterComment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +80,6 @@ class PdfDetailActivity : AppCompatActivity() {
         progressDialog.setTitle("Please wait...")
         progressDialog.setCanceledOnTouchOutside(false)
 
-
-
         //handle back button click
         binding.backBtn.setOnClickListener {
             onBackPressed()
@@ -85,12 +90,26 @@ class PdfDetailActivity : AppCompatActivity() {
 
         //
         loadBookDetail()
+        showComments()
 
         //handle click, open pdf view activity
         binding.readBookBtn.setOnClickListener {
             val intent = Intent(this, PdfViewActivity::class.java)
             intent.putExtra("bookId", bookId)
             startActivity(intent)
+        }
+
+
+        //handle click, download book/pdf
+        binding.downloadBookBtn.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                Log.d(TAG, "onCreate: STORAGE PERMISSION is already granted")
+                downloadBook()
+            }
+            else{
+                Log.d(TAG, "onCreate: STORAGE PERMISSION was not granted, LETS request it")
+                requestStoragePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
         }
 
         //handle click, add,remove favorire
@@ -110,25 +129,123 @@ class PdfDetailActivity : AppCompatActivity() {
                 }
                 else{
                     //not in fav. add
-                        addToFavorite()
+                    addToFavorite()
                 }
             }
 
-
         }
 
-        //handle click, download book/pdf
-        binding.downloadBookBtn.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                Log.d(TAG, "onCreate: STORAGE PERMISSION is already granted")
-                downloadBook()
+        //handle click, show add comment dialog
+        binding.addCommentBtn.setOnClickListener {
+            /*to add a comment , user must be logged in*/
+            if (firebaseAuth.currentUser == null){
+                //user not logged in
+                Toast.makeText(this, "You're not logged in", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                //user logged in, allow adding comment
+                addCommentDialog()
+            }
+        }
+
+
+    }
+
+    private fun showComments() {
+        //init arraylist
+        commentArayList = ArrayList()
+
+        //db path to load comments
+        val ref = FirebaseDatabase.getInstance().getReference("Books")
+        ref.child(bookId).child("Comments")
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear list
+                    commentArayList.clear()
+                    for (ds in snapshot.children){
+                        //get data
+                        val mode = ds.getValue(ModelComment::class.java)
+                        //add to list
+                        commentArayList.add(mode!!)
+                    }
+                    //setup adapter
+                    adapterComment = AdapterComment(this@PdfDetailActivity, commentArayList)
+                    //set adapter to recyclerview
+                    binding.commentsRv.adapter = adapterComment
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+    }
+
+    private var comment = ""
+    private fun addCommentDialog() {
+        //inflater/bind view for dialog
+        val commentAddBinding = DialogCommentAddBinding.inflate(LayoutInflater.from(this))
+
+        //setup alert dialog
+        val builder = AlertDialog.Builder(this, R.style.CustomDialog)
+        builder.setView(commentAddBinding.root)
+
+        //create and shoow alert dialog
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        //handle click, dismiss dialog
+        commentAddBinding.backBtn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        //handle click add comment
+        commentAddBinding.submitBtn.setOnClickListener {
+            //get data
+            comment = commentAddBinding.commentEt.text.toString().trim()
+            //validate Data
+            if (comment.isEmpty()){
+                Toast.makeText(this, "Enter comment...", Toast.LENGTH_SHORT).show()
+
             }
             else{
-                Log.d(TAG, "onCreate: STORAGE PERMISSION was not granted, LETS request it")
-                requestStoragePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                alertDialog.dismiss()
+                addComment()
+
             }
         }
+    }
 
+    private fun addComment() {
+        //show progress
+        progressDialog.setMessage("Adding Comment")
+        progressDialog.show()
+
+        //timestamp for comment id
+        val timestamp = "${System.currentTimeMillis()}"
+
+        //setup data to add in db for comment
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "$timestamp"
+        hashMap["bookId"] = "$bookId"
+        hashMap["timestamp"] = "$timestamp"
+        hashMap["comment"] = "$comment"
+        hashMap["uid"] = "${firebaseAuth.uid}"
+
+        //db path to add data into it
+        //Books> bookId> Comments> commentId> commentData
+        val ref = FirebaseDatabase.getInstance().getReference("Books")
+        ref.child(bookId).child("Comments").child(timestamp)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "Comment added...", Toast.LENGTH_SHORT).show()
+
+            }
+            .addOnFailureListener {e->
+                progressDialog.dismiss()
+                Toast.makeText(this, "Failed to add comment due to ${e.message}", Toast.LENGTH_SHORT).show()
+
+            }
 
     }
 
