@@ -10,13 +10,14 @@
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_button02.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_button03.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_edittext01.xml" value="0.1" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_rect01.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_toolbar01.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/shape_toolbar02.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/tab_background_selected.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/tab_background_unselected.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/drawable/tab_selector.xml" value="0.1" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_category_add.xml" value="0.2" />
-        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_dashboard_admin.xml" value="0.14351851851851852" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_dashboard_admin.xml" value="0.176" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_dashboard_user.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_edit.xml" value="0.264" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_list_admin.xml" value="0.136" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_pdf_view.xml" value="0.2" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_profile_edit.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Android_Studio/TryhardKotlin/BookApp/app/src/main/res/layout/fragment_books_user.xml" value="0.2" />

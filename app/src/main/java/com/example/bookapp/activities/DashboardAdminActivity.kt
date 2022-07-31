@@ -74,6 +74,11 @@ class DashboardAdminActivity : AppCompatActivity() {
             startActivity(Intent(this@DashboardAdminActivity, PdfAddActivity::class.java))
 
         }
+
+        //handle click, open profile
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this@DashboardAdminActivity, ProfileActivity::class.java))
+        }
     }
 
     private fun loadCategories() {
